@@ -41,11 +41,19 @@ public class OllamaToolEnabledPlugin implements ExecutorPlugin {
 // LangChain4j Tool Facade
 //----------------------------------------------------------------------------------------------------------------------
 
-    class ConversionToolFacade {
+    class UseOurServicesToolFacade {
 
         @Tool("Converts string to the new format.")
         String convertToNewFormat(String input) {
+            System.out.println("Converting string to the new format: " + input);
             return existingService.convertToNewSchema(input);
+        }
+
+        @Tool("Send message to destination")
+        String sendEventToQueue(String message, String destination) {
+            System.out.println("Send message \"" + message + "\"  to destination: " + destination);
+            //anotherExistingService.sendJMS(message, destination)
+            return "Sent message \"" + message + "\" to destination: " + destination;
         }
 
     }
@@ -68,7 +76,7 @@ public class OllamaToolEnabledPlugin implements ExecutorPlugin {
 
         assistant = AiServices.builder(Assistant.class)
                 .chatLanguageModel(model)
-                .tools(new ConversionToolFacade())
+                .tools(new UseOurServicesToolFacade())
                 .chatMemory(MessageWindowChatMemory.withMaxMessages(10))
                 .build();
     }
@@ -80,7 +88,7 @@ public class OllamaToolEnabledPlugin implements ExecutorPlugin {
 
     @Override
     public String describe() {
-        return "This is an Ollama Chat Simple Prompt plugin.";
+        return "This is an Ollama plugin that utlizies tools on our system.";
     }
 
     @Override
