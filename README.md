@@ -2,6 +2,23 @@
 
 Demo showing LangChain4j tools annotation.
 
+This demo provides an Ollama plugin which will utilize LangChain4j Tool support to
+call existing service available in the runtime Karaf. 
+
+This existing service may be a facade to a RESTFul service, or similar.
+
+# Build
+
+```text
+mvn clean install
+```
+
+# Install
+
+```text
+install -s mvn:com.savoir/existingService
+install -s mvn:com.savoir/ollamaPlugin
+```
 
 # Reaching Out
 
