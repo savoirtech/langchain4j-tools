@@ -23,6 +23,7 @@ import dev.langchain4j.agent.tool.Tool;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.ollama.OllamaChatModel;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.output.structured.Description;
 import dev.langchain4j.service.AiServices;
 import java.time.Duration;
 
@@ -41,19 +42,25 @@ public class OllamaToolEnabledPlugin implements ExecutorPlugin {
 // LangChain4j Tool Facade
 //----------------------------------------------------------------------------------------------------------------------
 
+    @Description("Available tools to AI model to perform user requests")
     class UseOurServicesToolFacade {
 
-        @Tool("Converts string to the new format.")
-        String convertToNewFormat(String input) {
-            System.out.println("Converting string to the new format: " + input);
-            return existingService.convertToNewSchema(input);
+        @Tool("Converts file referenced by fileId to the new format.")
+        String convertToNewFormat(String fileId) {
+            System.out.println("Converting fileId to the new format: " + fileId);
+            return existingService.convertToNewSchema(fileId);
         }
 
-        @Tool("Send message to destination")
-        String sendEventToQueue(String message, String destination) {
-            System.out.println("Send message \"" + message + "\"  to destination: " + destination);
+        @Tool("Send quoted message body to destination with postfix queue")
+        String sendEventToQueue(String quote, String destination) {
+            System.out.println("Send message \"" + quote + "\"  to destination: " + destination);
             //anotherExistingService.sendJMS(message, destination)
-            return "Sent message \"" + message + "\" to destination: " + destination;
+            return "Sent message \"" + quote + "\" to destination: " + destination;
+        }
+
+        @Tool("Not a tool request")
+        void noOp(String input) {
+            //
         }
 
     }

@@ -16,8 +16,11 @@ package com.savoir.apache.karaf.ai.gateway.ollama.tool.plugin;
  * limitations under the License.
  */
 
+import dev.langchain4j.service.SystemMessage;
+
 public interface Assistant {
 
+    @SystemMessage("You are an API Gateway, please provide friendly concise results when tools are executed.")
     String chat(String userMessage);
 
 }
