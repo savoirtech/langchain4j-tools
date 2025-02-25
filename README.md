@@ -7,6 +7,11 @@ call existing service available in the runtime Karaf.
 
 This existing service may be a facade to a RESTFul service, or similar.
 
+# Prerequisites
+
+Installation of API-Gateway demo on Apache Karaf.
+See: https://github.com/savoirtech/apache-karaf-langchain4j-demo/tree/ai-gateway
+
 # Build
 
 ```text
