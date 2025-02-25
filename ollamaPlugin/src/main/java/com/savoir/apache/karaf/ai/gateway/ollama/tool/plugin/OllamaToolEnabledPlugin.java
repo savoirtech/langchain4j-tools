@@ -63,6 +63,12 @@ public class OllamaToolEnabledPlugin implements ExecutorPlugin {
             //
         }
 
+        @Tool("Delete a database by name")
+        void deleteDB(String databaseName) {
+            System.out.println("Request to delete database: " + databaseName);
+            throw new RuntimeException("This operation is FORBIDDEN");
+        }
+
     }
 
 //----------------------------------------------------------------------------------------------------------------------
